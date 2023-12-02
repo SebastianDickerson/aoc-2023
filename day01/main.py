@@ -1,35 +1,5 @@
 import sys
-
-def part_one(data):
-
-    val = 0
-    
-    for line in data:
-        v = []
-        for c in line:
-            if c.isdigit():
-                v.append(c) 
-        n = ''.join(v)
-        num = n[0] + n[-1]
-        val += int(num)
-    print(val)
-
-def part_two(data, replace=True):
-
-    val = 0
-    
-    for line in data:
-        v = []
-        if replace:
-            for i, c in words.items():
-                line = line.replace(i, f"{i[0]}{c}{i[-1]}")
-        for c in line:
-            if c.isdigit():
-                v.append(c) 
-        n = ''.join(v)
-        num = n[0] + n[-1]
-        val += int(num)
-    print(val)
+import re
 
 if __name__ == "__main__":
 
@@ -45,13 +15,17 @@ if __name__ == "__main__":
         "nine": "9"
     }
 
-    print("Lets go Buddy!")
     lines = [line.rstrip() for line in sys.stdin.readlines()]
-    part_one(lines)
-    part_two(lines)
-
     
+    def calibration(data, replace=False):
+        calibration_value = 0
+        for line in data:
+            if replace:
+                for i, c in words.items():
+                    line = line.replace(i, f"{i[0]}{c}{i[-1]}")
+            j = ''.join(re.findall(r"\d+", line))
+            calibration_value += int(j[0] + j[-1])
+        return calibration_value
 
-        
-        
-        
+    print(f"Part one: {calibration(lines)}")
+    print(f"Part Two: {calibration(lines, replace=True)}")
