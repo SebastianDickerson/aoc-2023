@@ -5,8 +5,6 @@ import time
 def part_one(t, d):   
     ways_to_win = []
     races = zip(t, d)
-    f = 0
-    l = 0
     for t, d in races:
         ans = 0
         t,d = int(t), int(d)
